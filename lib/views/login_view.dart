@@ -1,6 +1,7 @@
-
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes/firebase_options.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -27,11 +28,11 @@ class _LoginViewState extends State<LoginView> {
     super.dispose();
   }
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text('Login'),
         backgroundColor: const Color.fromARGB(255, 207, 160, 98),
       ),
       body: FutureBuilder(
@@ -64,12 +65,29 @@ class _LoginViewState extends State<LoginView> {
             TextButton(onPressed: () async {
               final email = _email.text;
               final password = _password.text;
-              final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              try {
+                final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
                 email: email, 
                 password: password);
                 print(userCredential);
+               } on FirebaseAuthException catch (error) {
+                switch (error.code) {
+                  case 'invalid-credential': 
+                  print('User not found');
+                  case 'wrong-password':
+                  print('Wrong password');
+                  default:
+                  print('Someting else happened');
+
+                }
+                // if (error.code == 'invalid-credential') {
+                //   print('User not found');
+                // } else if (error.code == 'wrong-password') {
+                //   print('Someting else happened');
+                // }
+               }
             }, 
-            child: const Text('Register')
+            child: const Text('Login')
             )
           ],
         );
@@ -80,4 +98,5 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
-}
+ 
+} 
