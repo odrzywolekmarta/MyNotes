@@ -92,6 +92,8 @@ class _RegisterViewState extends State<RegisterView> {
                   print('Weak password');
                   case 'email-already-in-use':
                   print('Email already exists');
+                  case('invalid-email'):
+                  print('Invalid email');
                   default: 
                   print(error.code);
                   print('Something else happened');
