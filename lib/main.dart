@@ -14,7 +14,7 @@ void main() {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const LoginView(),
+      home: const RegisterView(),
     )
   );
 }
@@ -81,10 +81,22 @@ class _RegisterViewState extends State<RegisterView> {
             TextButton(onPressed: () async {
               final email = _email.text;
               final password = _password.text;
+              try {
               final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
                 email: email, 
                 password: password);
                 print(userCredential);
+              } on FirebaseAuthException catch (error) {
+                switch (error.code) {
+                  case 'weak-password':
+                  print('Weak password');
+                  case 'email-already-in-use':
+                  print('Email already exists');
+                  default: 
+                  print(error.code);
+                  print('Something else happened');
+                }
+              }
             }, 
             child: const Text('Register')
             )
