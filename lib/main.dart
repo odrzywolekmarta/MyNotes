@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mynotes/views/register_view.dart';
+import 'package:mynotes/views/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,8 +11,10 @@ void main() {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const RegisterView(),
+      home: const HomePage(),
     )
   );
 }
+
+
 
