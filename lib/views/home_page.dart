@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/firebase_options.dart';
@@ -9,12 +8,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        backgroundColor: const Color.fromARGB(255, 207, 160, 98),
-      ),
-      body: FutureBuilder(
+    return FutureBuilder(
         future: Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform,
         ),
@@ -29,31 +23,10 @@ class HomePage extends StatelessWidget {
           // }
           return const LoginView();
         default: 
-        return const Text('Loading...');
+        return const CircularProgressIndicator();
           }
         }, 
-      ),
-    );
+      );
   } 
 }
 
-class VerifyEmailView extends StatefulWidget {
-  const VerifyEmailView({super.key});
-
-  @override
-  State<VerifyEmailView> createState() => _VerifyEmailViewState();
-}
-
-class _VerifyEmailViewState extends State<VerifyEmailView> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-        Text('Please verify your email'),
-        TextButton(onPressed: () async {
-          final user = FirebaseAuth.instance.currentUser;
-          await user?.sendEmailVerification();
-        }, child: Text('Send email verification')) 
-      ]
-      );
-  }
-}
