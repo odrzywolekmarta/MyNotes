@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' show log;
 
+import 'package:mynotes/constants/routes.dart';
+
 enum MenuAction { logout }
 
 class NotesView extends StatefulWidget {
@@ -23,7 +25,7 @@ class _NotesViewState extends State<NotesView> {
                 case MenuAction.logout:
                   final shouldLogout = await showLogoutDialog(context);
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil('login/', (route) => false);
+                      .pushNamedAndRemoveUntil(loginRoute, (route) => false);
                   log(shouldLogout.toString());
               }
             },
