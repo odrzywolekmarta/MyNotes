@@ -9,7 +9,6 @@ void main() {
     MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
@@ -21,6 +20,4 @@ void main() {
     )
   );
 }
-
-
 
