@@ -60,6 +60,8 @@ class _LoginViewState extends State<LoginView> {
                       .signInWithEmailAndPassword(
                           email: email, password: password);
                   log(userCredential.toString());
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil('notes/', (route) => false);
                 } on FirebaseAuthException catch (error) {
                   switch (error.code) {
                     case 'invalid-credential':
