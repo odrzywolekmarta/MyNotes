@@ -73,11 +73,11 @@ class _LoginViewState extends State<LoginView> {
                       await showErrorDialog(context, 'Wrong credentials');
                     default:
                       await showErrorDialog(context,
-                          'Something went wrong, try again :(. Error ${error.code}');
+                          'Something went wrong, try again :(. Error: ${error.code}');
                   }
                 } catch (error) {
                   await showErrorDialog(context,
-                      'Something went wrong, try again :(. Error ${error.toString()}');
+                      'Something went wrong, try again :(. Error: ${error.toString()}');
                 }
               },
               child: const Text('Login')),
