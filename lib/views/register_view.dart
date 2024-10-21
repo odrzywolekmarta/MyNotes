@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/constants/routes.dart';
+import 'package:mynotes/utilities/show_error_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -65,15 +66,16 @@ class _RegisterViewState extends State<RegisterView> {
                 } on FirebaseAuthException catch (error) {
                   switch (error.code) {
                     case 'weak-password':
-                      log('Weak password');
+                      await showErrorDialog(context, 'Weak password');
                     case 'email-already-in-use':
-                      log('Email already exists');
+                      await showErrorDialog(context, 'Email already in use');
                     case ('invalid-email'):
-                      log('Invalid email');
+                      await showErrorDialog(context, 'Invalid email');
                     default:
-                      log(error.code);
-                      log('Something else happened');
+                      await showErrorDialog(context, 'Error: ${error.code}');
                   }
+                } catch (error) {
+                  showErrorDialog(context, 'Error: ${error.toString()}');
                 }
               },
               child: const Text('Register')),
