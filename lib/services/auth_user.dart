@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart' show User;
 class AuthUser {
   final bool isEmalVerified;
 
-  const AuthUser(this.isEmalVerified);
+  const AuthUser({required this.isEmalVerified});
 
-  factory AuthUser.fromFirebase(User user) => AuthUser(user.emailVerified);
+  factory AuthUser.fromFirebase(User user) =>
+      AuthUser(isEmalVerified: user.emailVerified);
 }
