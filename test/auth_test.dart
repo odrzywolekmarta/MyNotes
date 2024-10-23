@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:mynotes/services/auth_exceptions.dart';
 import 'package:mynotes/services/auth_user.dart';
 import 'package:mynotes/services/firebase_auth_provider.dart';
